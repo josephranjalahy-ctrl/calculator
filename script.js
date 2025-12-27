@@ -25,21 +25,22 @@ function operate() {
     }
 }
 
-// Functions populating the display
+// Elements needed for the display
 let body = document.querySelector("body");
 let digits = document.querySelectorAll(".digit");
 let operators = document.querySelectorAll(".operator");
 let div = document.createElement("div");
 body.appendChild(div);
 
-digits.forEach(digit => {
+// Functions that populate the display
+let number = digits.forEach(digit => {
   digit.addEventListener("click", () => {
-    div.textContent = digit.textContent;
+    div.textContent += digit.textContent;
   });
 });
 
-operators.forEach(operator => {
+let operation = operators.forEach(operator => {
     operator.addEventListener('click', () => {
-        div.textContent = operator.textContent;
+        div.textContent += operator.textContent;
     });
 });
