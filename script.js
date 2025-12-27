@@ -5,9 +5,9 @@ let multiply = (a, b) => a * b;
 let divide = (a, b) => a / b;
 
 // Elements needed for an operation
-let firstNumber;
-let operator;
-let secondNumber;
+let firstNumber = "";
+let operator = null;
+let secondNumber = "";
 
 // Operate function
 function operate() {
@@ -28,19 +28,36 @@ function operate() {
 // Elements needed for the display
 let body = document.querySelector("body");
 let digits = document.querySelectorAll(".digit");
-let operators = document.querySelectorAll(".operator");
+let operators = document.querySelectorAll(".normal.operator");
+let equal = document.querySelector(".final.operator");
 let div = document.createElement("div");
 body.appendChild(div);
 
 // Functions that populate the display
-let number = digits.forEach(digit => {
+digits.forEach(digit => {
   digit.addEventListener("click", () => {
-    div.textContent += digit.textContent;
+    if (operator === null) {
+      firstNumber += digit.textContent;
+      div.textContent = firstNumber;
+    } else {
+      secondNumber += digit.textContent;
+      div.textContent = secondNumber;
+    }
   });
 });
 
-let operation = operators.forEach(operator => {
-    operator.addEventListener('click', () => {
-        div.textContent += operator.textContent;
-    });
+operators.forEach(op => {
+  op.addEventListener("click", () => {
+    operator = op.textContent;
+    div.textContent = operator;
+  });
 });
+
+// Making the calculation
+equal.addEventListener('click', () => {
+    if (firstNumber !== "" && secondNumber !== "" && operator !== null) {
+        firstNumber = parseInt(firstNumber);
+        secondNumber = parseInt(secondNumber);
+        div.textContent = operate();
+    }
+})
